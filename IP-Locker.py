@@ -75,10 +75,10 @@ def blacklist():
     global PORT
     lines = loadFile()
     clear()
-    for x in lines:
+    for x in range(len(lines)):
         try:
-            print(f"{OTHER} BlackListing IP {x}")
-            os.system(COMMAND.format(ip=x.replace("\n", ""), port=PORT))
+            print(f"{OTHER} BlackListing IP {lines[x].replace("\n", "")} | Remaining IPS: {len(lines) - x}")
+            os.system(COMMAND.format(ip=lines[x].replace("\n", ""), port=PORT))
             time.sleep(0.05)
             clear()
         except KeyboardInterrupt:
