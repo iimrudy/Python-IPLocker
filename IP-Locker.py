@@ -5,8 +5,8 @@ import time
 
 # > /dev/null 2>&1
 
-ufw_command = "sudo ufw deny from {ip} to any port {port}"
-iptables_command = "sudo iptables - A INPUT -s {ip} -i eth1 -p tcp -m state --state NEW -m tcp --dport {port} - j DROP"
+ufw_command = "sudo ufw deny from {ip} to any port {port} > /dev/null 2>&1"
+iptables_command = "sudo iptables - A INPUT -s {ip} -i eth1 -p tcp -m state --state NEW -m tcp --dport {port} - j DROP > /dev/null 2>&1"
 
 COMMAND = ""
 PATH = ""
@@ -77,8 +77,10 @@ def blacklist():
     clear()
     for x in lines:
         try:
-            os.system(COMMAND.format(ip=x.replace("\n", ""), port=PORT) + " & clear")
+            clear()
+            os.system(COMMAND.format(ip=x.replace("\n", ""), port=PORT))
             print(f"{OTHER} BlackListing IP {x}")
+            time.sleep(0.05)
         except KeyboardInterrupt:
             sys.exit(WARNING + "Exit.")
             break
