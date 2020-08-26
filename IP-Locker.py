@@ -77,10 +77,10 @@ def blacklist():
     clear()
     for x in lines:
         try:
-            clear()
-            os.system(COMMAND.format(ip=x.replace("\n", ""), port=PORT))
             print(f"{OTHER} BlackListing IP {x}")
+            os.system(COMMAND.format(ip=x.replace("\n", ""), port=PORT))
             time.sleep(0.05)
+            clear()
         except KeyboardInterrupt:
             sys.exit(WARNING + "Exit.")
             break
