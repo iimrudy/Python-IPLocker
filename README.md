@@ -3,7 +3,7 @@
 Python3 script to deny connection to some specified IP range to port 22 (default ssh)
 
 ## Why ?
-This script give some bruteforce-protection locking for example all china's ips
+This script give some bruteforce-protection locking for example all china's ips range
 
 ## Usage
 ```
