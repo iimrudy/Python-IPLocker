@@ -7,13 +7,17 @@ This script give some bruteforce-protection locking for example all china's ips
 
 ## Usage
 ```
+Clone the repository
 
 git clone https://github.com/iimrudy/Python-IPLocker.git
 
+Go inside the repository's folder
 cd Python-IPLocker
 
+Install dependencies with pip3
 pip3 install -r requirements.txt
 
+Run the script!
 python3 IP-Locker.py
 
 ```
