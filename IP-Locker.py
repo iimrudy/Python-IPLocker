@@ -77,7 +77,8 @@ def blacklist():
     clear()
     for x in range(len(lines)):
         try:
-            print(f"{OTHER} BlackListing IP {lines[x].replace("\n", "")} | Remaining IPS: {len(lines) - x}")
+            print(f"{OTHER} BlackListing IP " + lines[x].replace("\n", "") + f" | Remaining IPS: {len(lines) - x}")
+            
             os.system(COMMAND.format(ip=lines[x].replace("\n", ""), port=PORT))
             time.sleep(0.05)
             clear()
