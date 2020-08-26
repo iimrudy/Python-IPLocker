@@ -59,7 +59,9 @@ def use_custom_path():
 def loadFile():
     global PATH, COMMAND
     file = open(PATH, 'r')
-    return file.readlines()
+    l = file.readlines()
+    file.close()
+    return l
 
 def blacklist():
     lines = loadFile()
