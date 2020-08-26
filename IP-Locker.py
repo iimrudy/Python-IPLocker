@@ -13,13 +13,17 @@ PORT = ""
 WARNING = Fore.WHITE + "[" + Fore.RED + " ! " + Fore.WHITE + "] " + Fore.WHITE
 ATTENTION = Fore.WHITE + "[" + Fore.YELLOW + " ! " + Fore.WHITE + "] " + Fore.WHITE
 FINE = Fore.WHITE + "[" + Fore.GREEN + " ! " + Fore.WHITE + "] " + Fore.WHITE
+
 OTHER = Fore.WHITE + "[" + Fore.BLUE + " * " + Fore.WHITE + "] " + Fore.WHITE
+
 QUESTION = Fore.WHITE + "[" + Fore.GREEN + " ? " + Fore.WHITE + "] " + Fore.WHITE
 
 Y_N = Fore.GREEN + "[Y]es" + Fore.WHITE + " / " + Fore.RED + "[N]o" + Fore.WHITE
 
+
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
+
 
 def verifyPerms():
     if os.name == "nt":
@@ -30,11 +34,11 @@ def verifyPerms():
         clear()
         print(WARNING + "This script must be run as root!\n")
         exit()
-        
+
+
 def yesORno():
     value = input()
     return value.lower() in "yes"
-
 
 
 def askFile():
@@ -44,6 +48,7 @@ def askFile():
         return use_custom_path()
     else:
         return "./range.txt"
+
 
 def use_custom_path():
     print(FINE + "Ok, now give me the path of the file")
@@ -56,13 +61,13 @@ def use_custom_path():
         return use_custom_path()
 
 
-
 def loadFile():
     global PATH, COMMAND
     file = open(PATH, 'r')
     l = file.readlines()
     file.close()
     return l
+
 
 def blacklist():
     global PORT
@@ -71,13 +76,15 @@ def blacklist():
     for x in lines:
         #clear()
         try:
-            os.system(COMMAND.format(ip=x, port=PORT) + " & clear")
+            os.system("clear & " + COMMAND.format(ip=x.replace("\n", ""), port=PORT))
             print(f"{OTHER} BlackListing IP {x}")
         except KeyboardInterrupt:
             sys.exit(WARNING + "Exit.")
             break
+    print(PORT)
     print(FINE + "Done, Bye!")
     exit()
+
 
 def askPort():
     global PORT
@@ -94,6 +101,7 @@ def askPort():
     else:
         askPort()
 
+
 def what_command():
     global COMMAND
     clear()
@@ -108,8 +116,7 @@ def what_command():
         COMMAND = ufw_command
         askPort()
     else:
-        what_command() 
-
+        what_command()
 
 
 def start():
@@ -122,10 +129,5 @@ def start():
     what_command()
 
 
-
 if __name__ == '__main__':
     start()
-
-
-
-
