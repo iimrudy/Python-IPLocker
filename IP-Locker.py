@@ -8,6 +8,7 @@ iptables_command = "sudo iptables - A INPUT -s {ip} -i eth1 -p tcp -m state --st
 
 COMMAND = ""
 PATH = ""
+PORT = ""
 
 WARNING = Fore.WHITE + "[" + Fore.RED + " ! " + Fore.WHITE + "] " + Fore.WHITE
 ATTENTION = Fore.WHITE + "[" + Fore.YELLOW + " ! " + Fore.WHITE + "] " + Fore.WHITE
@@ -64,12 +65,13 @@ def loadFile():
     return l
 
 def blacklist():
+    global PORT
     lines = loadFile()
     clear()
     for x in lines:
         #clear()
         try:
-            os.system(COMMAND.format(ip=x, port="22") + " & clear")
+            os.system(COMMAND.format(ip=x, port=PORT) + " & clear")
             print(f"{OTHER} BlackListing IP {x}")
         except KeyboardInterrupt:
             sys.exit(WARNING + "Exit.")
@@ -77,6 +79,20 @@ def blacklist():
     print(FINE + "Done, Bye!")
     exit()
 
+def askPort():
+    global PORT
+    print(QUESTION + "Port where ip's need to be blacklisted ? \n")
+    print(Fore.YELLOW + "[ 1 ] " + Fore.WHITE + "80 (HTTP)")
+    print(Fore.YELLOW + "[ 2 ] " + Fore.WHITE + "22 (SSH)")
+    i = input()
+    if i == "1":
+        PORT = "80"
+        blacklist()
+    elif i == "2":
+        PORT = "22"
+        blacklist()
+    else:
+        askPort()
 
 def what_command():
     global COMMAND
@@ -87,12 +103,14 @@ def what_command():
     i = input()
     if i == "1":
         COMMAND = iptables_command
-        blacklist()
+        askPort()
     elif i == "2":
         COMMAND = ufw_command
-        blacklist()
+        askPort()
     else:
         what_command() 
+
+
 
 def start():
     global PATH
