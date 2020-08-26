@@ -22,3 +22,6 @@ pip3 install -r requirements.txt
 python3 IP-Locker.py
 
 ```
+
+## WARNING
+**i'm not responsible to any damage of your vps / server / computer. Everything you do with this repository and its contents will be your full responsibility.**
